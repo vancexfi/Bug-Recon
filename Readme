@@ -1,0 +1,99 @@
+### **BugRecon - Automated Bug Hunting Tool**  
+**Author:** Vance  
+
+---
+
+## **Introduction**  
+BugRecon is an automated bug reconnaissance tool designed to streamline the bug-hunting process. It performs subdomain enumeration, port scanning, directory brute-forcing, vulnerability scanning, and screenshot capturing.  
+
+---
+
+## **Features**  
+
+✔ **Subdomain Enumeration** - Uses `crt.sh` to find subdomains.  
+✔ **Port Scanning** - Utilizes `nmap` to discover open ports.  
+✔ **Directory Brute-Forcing** - Uses `ffuf` for directory enumeration.  
+✔ **Vulnerability Scanning** - Checks for **SQL Injection** and **XSS vulnerabilities**.  
+✔ **Screenshot Capture** - Uses `Eyewitness` to take screenshots of discovered domains.  
+✔ **Custom Recon Levels** - `shallow`, `medium`, and `deep` modes for different scanning intensities.  
+✔ **Report Generation** - Saves the results in a structured report.  
+
+---
+
+## **Installation & Requirements**  
+### **Dependencies**  
+- Python 3.x  
+- `requests`  
+- `nmap`  
+- `ffuf`  
+- `eyewitness`  
+
+### **Installation**  
+1. Install Python dependencies:  
+   ```bash
+   pip install requests
+   ```
+2. Ensure external tools are installed:  
+   ```bash
+   sudo apt install nmap eyewitness
+   ```
+   Install `ffuf` from GitHub:  
+   ```bash
+   go install github.com/ffuf/ffuf@latest
+   ```
+
+---
+
+## **Usage**  
+
+### **Basic Usage**  
+```bash
+python bugrecon.py -d example.com -r deep
+```
+
+### **Options**  
+| Option | Description |
+|---------|------------|
+| `-d, --domain` | Target domain for reconnaissance |
+| `-r, --recon-depth` | Recon depth: `shallow`, `medium`, `deep` |
+| `-o, --output-file` | File to save subdomains (default: `subdomains.txt`) |
+| `-t, --threads` | Threads for brute-forcing (default: `50`) |
+
+---
+
+## **Recon Levels Explained**  
+| Mode | Features |
+|------|------------|
+| **Shallow** | Finds subdomains, saves results. |
+| **Medium** | Scans ports and performs directory brute-force. |
+| **Deep** | Includes vulnerability scanning and screenshot capture. |
+
+---
+
+## **Example Commands**  
+
+### **Find Subdomains and Save to File**  
+```bash
+python bugrecon.py -d target.com -r shallow -o subdomains.txt
+```
+
+### **Run Full Bug Recon with Deep Scan**  
+```bash
+python bugrecon.py -d target.com -r deep -t 100
+```
+
+### **Display Help Menu**  
+```bash
+python bugrecon.py -h
+```
+
+---
+
+## **Output & Reporting**  
+- **Subdomains** → Saved to the specified output file.  
+- **Port Scan Results** → Displayed in the terminal.  
+- **Brute-force Results** → Saved per domain/port.  
+- **Screenshots** → Stored in `eyewitness_output/`.  
+- **Final Report** → Generated as `<domain>_report.txt`.  
+
+---
